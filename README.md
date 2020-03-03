@@ -305,3 +305,125 @@ Angular add classes to control which indicate state of control.Here is an exampl
 ```html
 <input _ngcontent-tqh-c0="" class="form-control ng-dirty ng-valid ng-touched" id="username" name="username" ngmodel="" required="" type="text" ng-reflect-required="" ng-reflect-name="username" ng-reflect-model="">
 ```
+
+### Using the state Example:
+
+#### app.component.html
+```html
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div id="user-data">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+             type="text"
+              id="username" 
+              class="form-control"
+              ngModel
+              name="username"
+              required
+              >
+          </div>
+          <button class="btn btn-default" type="button">Suggest an Username</button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input 
+            type="email" 
+            id="email"
+            class="form-control"
+            ngModel
+            name="email"
+            required
+            email
+            >
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select 
+          id="secret"
+           class="form-control"
+           ngModel
+           name="secret"
+           >
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <button [disabled]="!f.valid" class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+```
+#### app.component.css
+
+```css
+input.ng-invalid.ng-touched {
+  border:solid 1px red;
+}
+```
+
+## Outputing Validation Error Messages
+By useing form or control state we can change UI. below is the example were we are showing a error message if username and email vlaid state is invalid.
+
+```html
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div id="user-data">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+             type="text"
+              id="username" 
+              class="form-control"
+              ngModel
+              name="username"
+              required
+              #username="ngModel"
+              >
+              <p *ngIf="!username.valid && username.touched">User Name can't be empty</p>
+          </div>
+          <button class="btn btn-default" type="button">Suggest an Username</button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input 
+            type="email" 
+            id="email"
+            class="form-control"
+            ngModel
+            name="email"
+            required
+            email
+            #email="ngModel"
+            >
+          </div>
+        </div>
+        <p *ngIf="!email.valid && email.touched">Please enter a valid email</p>
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select 
+          id="secret"
+           class="form-control"
+           ngModel
+           name="secret"
+           >
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <button [disabled]="!f.valid" class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+```
