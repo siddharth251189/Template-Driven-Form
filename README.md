@@ -161,10 +161,35 @@ export class AppComponent {
     const suggestedName = 'Superuser';
   }
   onSubmit(form:NgForm){
-    //this form will return form object on console
+    //this function will return form object on console
     console.log(form)
   }
 }
 
 
 ```
+
+## Understanding State of Form
+
+NgForm directive have an object which contain diffrent ststes of the form. there are some popular states :
+
+```javascript
+
+value: any
+valid: boolean | null
+invalid: boolean | null
+pending: boolean | null
+disabled: boolean | null
+enabled: boolean | null
+errors: ValidationErrors | null
+pristine: boolean | null
+dirty: boolean | null
+touched: boolean | null
+status: string | null
+untouched: boolean | null
+statusChanges: Observable<any> | null
+valueChanges: Observable<any> | null
+path: string[] | null
+
+```
+
