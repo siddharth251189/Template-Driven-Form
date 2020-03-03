@@ -270,3 +270,38 @@ onSubmit(){
 
 
 ```
+
+## Adding Validation to check User Input
+
+For adding validation we need to ad required property to yhe controll.
+
+## Using the Form State
+
+By using form state we can validate our form controls. For example if we need to disable submit button so can to as follow:
+
+```html
+ <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <button [disabled]="!f.valid" class="btn btn-primary" type="submit">
+        Submit
+    </button>
+ </form>
+```
+
+In this example f is a local refrence of ngForm, so if form will be invalid at same time button also will be dissabled once form's valid state change to true button will be Enable.
+
+
+### About validation classes
+
+Angular add classes to control which indicate state of control.Here is an example of angular control:
+
+#### Invalid Control
+
+```html
+<input _ngcontent-qgq-c0="" class="form-control ng-pristine ng-invalid ng-touched" id="username" name="username" ngmodel="" required="" type="text" ng-reflect-required="" ng-reflect-name="username" ng-reflect-model="">
+```
+
+#### Valid Control
+
+```html
+<input _ngcontent-tqh-c0="" class="form-control ng-dirty ng-valid ng-touched" id="username" name="username" ngmodel="" required="" type="text" ng-reflect-required="" ng-reflect-name="username" ng-reflect-model="">
+```
