@@ -617,6 +617,40 @@ export class AppComponent {
 ```
 
 ## Setting and Patching Form Values
+### setValue Method
+By Using setValue method we can set the value og any input but we need to overwrite complete object as below:
+
+```javascript
+  suggestUserName() {
+    const suggestedName = 'Superuser';
+    this.signupForm.setValue({
+      userData:{
+        username:suggestedName,
+        email:'',
+        
+      },
+      secret:'pet',
+      answer:'',
+      gender:'Male'
+    })
+  }
+
+```
+### patchValue Method
+
+By using patch value method we can set value to only one input, we do not need to overwrite whole object for this. Example is given below:
+
+```javascript
+  suggestUserName() {
+    const suggestedName = 'Superuser';
+    this.signupForm.form.patchValue({
+      userData:{
+        username:suggestedName
+      }
+    })
+  }
+
+```
 
 
 ## Using Form Data
