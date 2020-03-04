@@ -617,3 +617,45 @@ export class AppComponent {
 ```
 
 ## Setting and Patching Form Values
+
+
+## Using Form Data
+
+For using form data we need to make a object like below:
+
+```javasctipt
+user={
+    username:'',
+    email:'',
+    secretQuestions:'',
+    answer:'',
+    gender:''
+
+  }
+```
+After that we need to assign form value to that object value like below:
+```javasctipt
+onSubmit(){
+  console.log(this.signupForm)
+  this.formSubmited=true;
+  this.user.username=this.signupForm.value.userData.username;
+  this.user.email=this.signupForm.value.userData.email;
+  this.user.secretQuestions=this.signupForm.value.secret;
+  this.user.answer=this.signupForm.value.answer;
+  this.user.gender=this.signupForm.value.gender;
+  this.signupForm.reset();
+
+}
+
+Now we have our data store in user object so we can use as required, I am just printing this data on the page:
+
+```html
+<p>User Name:{{user.username}}</p>
+    <p>Mail:{{user.email}}</p>
+    <p>Secret Question:{{user.secretQuestions}}</p>
+    <p>Answer:{{user.answer}}</p>
+    <p>Gender:{{user.gender}}</p>
+
+```
+
+```
