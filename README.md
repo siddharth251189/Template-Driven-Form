@@ -427,3 +427,137 @@ By useing form or control state we can change UI. below is the example were we a
 
 
 ```
+
+## Set Default Value
+
+### app.component.ts
+
+```javascript
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  @ViewChild('f') signupForm:NgForm;
+  
+defaultQuestion="pet";
+
+}
+```
+
+### app.component.html
+
+```html
+
+ <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select 
+          id="secret"
+           class="form-control"
+           ngModel
+           name="secret"
+           [ngModel]="defaultQuestion"
+           >
+           <!-- defaultQuestion="pet"; here we are setting default value of dropdown by property binding-->
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+
+```
+
+## Using ngModel with Two-Way-Binding
+
+We use [(ngModel)] for two way data binding 
+
+### app.component.html
+
+```html
+ <div class="form-group">
+          <textarea name="answer" [(ngModel)]="name" class="form-control" col="3"></textarea>
+          <p>This is answer:{{name}}</p>
+        </div>
+```
+
+## Grouping Form Controls
+### Syntax To Remember
+
+1. ngModelGroup
+
+#### app.component.html
+```html
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div id="user-data" ngModelGroup="userData">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+             type="text"
+              id="username" 
+              class="form-control"
+              ngModel
+              name="username"
+              required
+              #username="ngModel"
+              >
+              <p *ngIf="!username.valid && username.touched">User Name can't be empty</p>
+          </div>
+          <button class="btn btn-default" type="button">Suggest an Username</button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input 
+            type="email" 
+            id="email"
+            class="form-control"
+            ngModel
+            name="email"
+            required
+            email
+            #email="ngModel"
+            >
+          </div>
+        </div>
+        <p *ngIf="!email.valid && email.touched">Please enter a valid email</p>
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select 
+          id="secret"
+           class="form-control"
+           ngModel
+           name="secret"
+           [ngModel]="defaultQuestion"
+           >
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea name="answer" [(ngModel)]="name" class="form-control" col="3"></textarea>
+          <p>This is answer:{{name}}</p>
+        </div>
+        <button [disabled]="!f.valid" class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+```
+In Above example we wrap our username and email within userData with ngModelGroup. After submiting the form, ngForm object will return following value in value property. In the value object we can see that ngModelGroup will make a group of username and email.
+
+```javascript
+
+userData:
+username: "sandesh251189"
+email: "siddharthuiux@gmail.com"
+__proto__: Object
+secret: "pet"
+answer: "asd"
+```
