@@ -495,7 +495,10 @@ We use [(ngModel)] for two way data binding
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div id="user-data" ngModelGroup="userData">
+        <div id="user-data" 
+        ngModelGroup="userData"
+        #userData="ngModelGroup"
+        >
           <div class="form-group">
             <label for="username">Username</label>
             <input
@@ -507,7 +510,6 @@ We use [(ngModel)] for two way data binding
               required
               #username="ngModel"
               >
-              <p *ngIf="!username.valid && username.touched">User Name can't be empty</p>
           </div>
           <button class="btn btn-default" type="button">Suggest an Username</button>
           <div class="form-group">
@@ -524,7 +526,8 @@ We use [(ngModel)] for two way data binding
             >
           </div>
         </div>
-        <p *ngIf="!email.valid && email.touched">Please enter a valid email</p>
+        
+        <p *ngIf="!userData.valid && userData.touched">User Data is invalid</p>
         <div class="form-group">
           <label for="secret">Secret Questions</label>
           <select 
@@ -549,8 +552,9 @@ We use [(ngModel)] for two way data binding
 </div>
 
 
+
 ```
-In Above example we wrap our username and email within userData with ngModelGroup. After submiting the form, ngForm object will return following value in value property. In the value object we can see that ngModelGroup will make a group of username and email.
+In Above example we wrap our username and email within userData with ngModelGroup. After submiting the form, ngForm object will return following value in value property. In the value object we can see that ngModelGroup will make a group of username and email.we can use userData state after adding a local refrence like #userData="ngModelGroup"
 
 ```javascript
 
