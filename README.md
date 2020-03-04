@@ -565,3 +565,55 @@ __proto__: Object
 secret: "pet"
 answer: "asd"
 ```
+
+## Working with radio button
+
+### app.component.ts
+
+```javascript
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  @ViewChild('f') signupForm:NgForm;
+  
+  genders=['Male','Female']
+
+}
+
+```
+
+### app.component.html
+
+```html
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="radio" *ngFor="let gender of genders">
+            <label>
+          <input 
+              type="radio" 
+              name="gender"
+              ngModel
+              [value]="gender"
+             >
+              {{gender}}
+              
+              </label>
+          </div>
+        
+        <button [disabled]="!f.valid" class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+```
+
+## Setting and Patching Form Values
